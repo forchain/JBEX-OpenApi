@@ -1,3 +1,4 @@
 .idea
 sdk/python/tests/_trial_temp*
+sdk/python/traders/config/config.json
 

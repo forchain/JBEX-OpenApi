@@ -12,13 +12,8 @@ if __name__ == '__main__':
     broker_log.setLevel(logging.DEBUG)
     broker_log.addHandler(logging.StreamHandler())
 
-    proxies = {
-        "http": "",
-        "https": "",
-    }
-
     entry_point = 'https://api.jbex.com/openapi/'  # like: https://api.xxx.yyy/openapi/ where xxx.yyy is your base domain
-    b = BrokerClient(entry_point, api_key='fzFNJk1qnDtw0RS3ERO9fDreqT6NjatM5obhRcETqK5xsJppzM3y9WHQndDaEpV2', secret='O4GDKZj5AFOT4PzXTnmdXWE1fnZlwdjOfgXzuBcNCjEWFryvncDlcZEAHlEz3g6S', proxies=proxies)
+    b = BrokerClient(entry_point, api_key='', secret='')
 
     # b.time()time
 
@@ -26,18 +21,18 @@ if __name__ == '__main__':
 
     broker_info = b.broker_info()
 
-    # b.depth('MEERUSDT')
+    # b.depth('BTCUSDT')
 
-    # b.trades('MEERUSDT')
+    # b.trades('BTCUSDT')
 
-    # kl = b.klines('MEERUSDT', interval='1h')
+    # kl = b.klines('BTCUSDT', interval='1h')
     #
     # df = pd.DataFrame(kl)
 
 
-    # b.ticker_24hr('MEERUSDT')
+    # b.ticker_24hr('BTCUSDT')
 
-    # result = b.order_new(symbol='MEERUSDT', side='BUY', type='LIMIT', quantity='10', price='0.1', timeInForce='GTC')
+    # result = b.order_new(symbol='BTCUSDT', side='BUY', type='LIMIT', quantity='10', price='0.1', timeInForce='GTC')
     #
     # print(result)
     #

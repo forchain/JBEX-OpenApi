@@ -21,8 +21,8 @@ class TraderTestCase(unittest.TestCase):
 
         entry_point = 'https://api.jbex.com/openapi/'  # like: https://api.xxx.yyy/openapi/ where xxx.yyy is     your base domain
         self.broker_client = BrokerClient(entry_point,
-                                          api_key='fzFNJk1qnDtw0RS3ERO9fDreqT6NjatM5obhRcETqK5xsJppzM3y9WHQndDaEpV2',
-                                          secret='O4GDKZj5AFOT4PzXTnmdXWE1fnZlwdjOfgXzuBcNCjEWFryvncDlcZEAHlEz3g6S',
+                                          api_key='',
+                                          secret='',
                                           proxies=proxies)
         t = self.broker_client.time()
         print(t)
@@ -50,10 +50,10 @@ class TraderTestCase(unittest.TestCase):
         }
 
         entry_point = 'https://api.jbex.com/openapi/'  # like: https://api.xxx.yyy/openapi/ where xxx.yyy is your base domain
-        b = BrokerClient(entry_point, api_key='fzFNJk1qnDtw0RS3ERO9fDreqT6NjatM5obhRcETqK5xsJppzM3y9WHQndDaEpV2',
-                         secret='O4GDKZj5AFOT4PzXTnmdXWE1fnZlwdjOfgXzuBcNCjEWFryvncDlcZEAHlEz3g6S', proxies=proxies)
+        b = BrokerClient(entry_point, api_key='',
+                         secret='', proxies=proxies)
 
-        raw = b.klines('MEERUSDT', interval='1h', limit=1000, start_time=st, end_time=et)
+        raw = b.klines('BTCUSDT', interval='1h', limit=1000, start_time=st, end_time=et)
         df = pd.DataFrame(raw)
         print(df)
         self.assertTrue(True)
@@ -71,7 +71,7 @@ class TraderTestCase(unittest.TestCase):
         }
 
         entry_point = 'https://api.jbex.com/openapi/'  # like: https://api.xxx.yyy/openapi/ where xxx.yyy is your base domain
-        b = BrokerClient(entry_point, api_key='fzFNJk1qnDtw0RS3ERO9fDreqT6NjatM5obhRcETqK5xsJppzM3y9WHQndDaEpV2',
+        b = BrokerClient(entry_point, api_key='',
                          secret='O4GDKZj5AFOT4PzXTnmdXWE1fnZlwdjOfgXzuBcNCjEWFryvncDlcZEAHlEz3g6S', proxies=proxies)
 
         sd = datetime(year=2021, month=12, day=1)
@@ -83,7 +83,7 @@ class TraderTestCase(unittest.TestCase):
 
         print(st)
         print(et)
-        raw = b.klines('MEERUSDT', interval='1h', start_time=st, end_time=et)
+        raw = b.klines('BTCUSDT', interval='1h', start_time=st, end_time=et)
         df = pd.DataFrame(raw)
         print(df)
 
@@ -96,7 +96,7 @@ class TraderTestCase(unittest.TestCase):
 
         print(st)
         print(et)
-        raw = b.klines('MEERUSDT', interval='1h', start_time=st, end_time=et)
+        raw = b.klines('BTCUSDT', interval='1h', start_time=st, end_time=et)
         df = pd.DataFrame(raw)
         print(df)
 

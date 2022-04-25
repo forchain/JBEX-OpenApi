@@ -11,8 +11,23 @@ friendly api doc at : <https://apidocs.jbex.com>
 ### 1. Jubi History
 export history within specified time range, the exported file is  /tmp/jubi-history.xlsx
 
-#### Command
+#### command
 ```shell
 cd sdk/python/traders
+cp config/sample.json config/config.json
 python jubi_history.py
+```
+#### config
+in sdk/python/traders/jubi_history.py
+```
+1. year, month, day
+start date
+2. days
+time span, zero means to the latest
+3. pair
+token pair, e.g., "BTCUSDT"
+4. secret, api_secret
+apply from JUBI
+5. proxy
+https proxy, in case jubi api server was blocked by ISP, e.g. "https://127.0.0.1:1087"
 ```

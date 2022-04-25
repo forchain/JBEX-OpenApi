@@ -2,6 +2,7 @@ import logging
 import time
 
 import numpy as np
+import json
 from datetime import datetime, timedelta
 import pandas as pd
 from broker import broker_log
@@ -13,10 +14,12 @@ from broker.client import BrokerClient
 
 
 class JubiTrader:
-    def __init__(self, year=2021, month=12, day=1, pair='MEERUSDT', days=0):
-        self.start_date = datetime(year=year, month=month, day=day)
-        self.pair = pair
-        self.end_date = self.start_date + timedelta(days=days)
+    def __init__(self):
+        fp = open('config/config.json', 'r')
+        self.config = json.load(fp)
+        self.start_date = datetime(year=self.config["year"], month=self.config["month"], day=self.config["day"])
+        self.pair = self.config["pair"]
+        self.end_date = self.start_date + timedelta(days=self.config["days"])
 
     def connect(self):
         broker_log.setLevel(logging.DEBUG)
@@ -24,13 +27,13 @@ class JubiTrader:
 
         proxies = {
             "http": "",
-            "https": "",
+            "https": self.config["proxy"],
         }
 
         entry_point = 'https://api.jbex.com/openapi/'  # like: https://api.xxx.yyy/openapi/ where xxx.yyy is your base domain
         self.broker_client = BrokerClient(entry_point,
-                                          api_key='fzFNJk1qnDtw0RS3ERO9fDreqT6NjatM5obhRcETqK5xsJppzM3y9WHQndDaEpV2',
-                                          secret='O4GDKZj5AFOT4PzXTnmdXWE1fnZlwdjOfgXzuBcNCjEWFryvncDlcZEAHlEz3g6S',
+                                          api_key=self.config["api_key"],
+                                          secret=self.config["secret"],
                                           proxies=proxies)
         ts_now = time.time()
         if self.end_date == self.start_date:
@@ -69,5 +72,5 @@ class JubiTrader:
 
 
 if __name__ == '__main__':
-    jt = JubiTrader(days=0)
+    jt = JubiTrader()
     jt.run()
