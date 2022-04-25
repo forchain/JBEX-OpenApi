@@ -40,17 +40,21 @@ class JubiTrader:
         self.connect()
 
         start_date = self.start_date
-        end_date = start_date + timedelta(days=1)
+        # end_date = start_date + timedelta(days=1)
+        end_date = start_date + timedelta(days=40)
         print("start_date", start_date)
         print("end_date", end_date)
         df = pd.DataFrame()
-        while end_date <= self.end_date:
+        while start_date <= self.end_date:
             start_time = int(datetime.timestamp(start_date) * 1000)
             end_time = int(datetime.timestamp(end_date) * 1000)
             print("start_time", start_time)
             print("end_time", end_time)
-            klines = self.broker_client.klines(self.pair, interval='1h', start_time=start_time, end_time=end_time)
+            klines = self.broker_client.klines(self.pair, interval='1h', start_time=start_time, end_time=end_time,
+                                               limit=999)
             df_k = pd.DataFrame(klines)
+            if df_k.empty:
+                continue
             df_k = df_k.drop(df_k.columns[[6, 7, 8, 9, 10]], axis=1)
             df_k = df_k.set_axis(['time', 'open', 'high', 'low', 'close', 'amount'], axis=1)
             df_k['time'] = pd.to_datetime(df_k['time'], unit='ms')
@@ -59,9 +63,9 @@ class JubiTrader:
             df = pd.concat([df, df_k])
 
             start_date = end_date + timedelta(hours=1)
-            end_date = start_date + timedelta(days=1)
+            end_date = start_date + timedelta(days=40)
         print(df)
-        df.to_excel('/tmp/klines.xlsx')
+        df.to_excel('/tmp/jubi-history.xlsx')
 
 
 if __name__ == '__main__':
