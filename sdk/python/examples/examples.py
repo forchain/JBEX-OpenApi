@@ -1,6 +1,9 @@
 import logging
-import time
+import numpy as np
+import pandas as pd
 
+import sys
+sys.path.insert(0, '..')
 from broker.client import BrokerClient
 
 if __name__ == '__main__':
@@ -14,49 +17,52 @@ if __name__ == '__main__':
         "https": "",
     }
 
-    entry_point = ''  # like: https://api.xxx.yyy/openapi/ where xxx.yyy is your base domain
-    b = BrokerClient(entry_point, api_key='', secret='', proxies=proxies)
+    entry_point = 'https://api.jbex.com/openapi/'  # like: https://api.xxx.yyy/openapi/ where xxx.yyy is your base domain
+    b = BrokerClient(entry_point, api_key='fzFNJk1qnDtw0RS3ERO9fDreqT6NjatM5obhRcETqK5xsJppzM3y9WHQndDaEpV2', secret='O4GDKZj5AFOT4PzXTnmdXWE1fnZlwdjOfgXzuBcNCjEWFryvncDlcZEAHlEz3g6S', proxies=proxies)
 
-    print(b.time())
+    # b.time()time
 
-    print(int(time.time() * 1000))
+    # print(int(time.time() * 1000))
 
-    print(b.broker_info())
+    broker_info = b.broker_info()
 
-    print(b.depth('BTCUSDT'))
+    # b.depth('MEERUSDT')
 
-    print(b.trades('BTCUSDT'))
+    # b.trades('MEERUSDT')
 
-    print(b.klines('BTCUSDT'))
+    # kl = b.klines('MEERUSDT', interval='1h')
+    #
+    # df = pd.DataFrame(kl)
 
-    print(b.ticker_24hr('BTCUSDT'))
 
-    result = b.order_new(symbol='BTCUSDT', side='BUY', type='LIMIT', quantity='10', price='0.1', timeInForce='GTC')
+    # b.ticker_24hr('MEERUSDT')
 
-    print(result)
-
-    order_id = result['orderId']
-
-    print(order_id)
-
-    print(b.order_get(order_id=order_id))
-
-    print(b.order_cancel(order_id=order_id))
-
-    print(b.open_orders())
-
-    print(b.history_orders())
-
-    print(b.account())
-
-    print(b.my_trades())
-
-    listen_key = b.stream_get_listen_key()
-
-    print(listen_key)
-
-    print(b.stream_keepalive(listen_key.get('listenKey')))
-
-    print(b.stream_close(listen_key.get('listenKey')))
-
-    print(b.deposit_orders())
+    # result = b.order_new(symbol='MEERUSDT', side='BUY', type='LIMIT', quantity='10', price='0.1', timeInForce='GTC')
+    #
+    # print(result)
+    #
+    # order_id = result['orderId']
+    #
+    # print(order_id)
+    #
+    # print(b.order_get(order_id=order_id))
+    #
+    # print(b.order_cancel(order_id=order_id))
+    #
+    # print(b.open_orders())
+    #
+    # print(b.history_orders())
+    #
+    # print(b.account())
+    #
+    # print(b.my_trades())
+    #
+    # listen_key = b.stream_get_listen_key()
+    #
+    # print(listen_key)
+    #
+    # print(b.stream_keepalive(listen_key.get('listenKey')))
+    #
+    # print(b.stream_close(listen_key.get('listenKey')))
+    #
+    # print(b.deposit_orders())

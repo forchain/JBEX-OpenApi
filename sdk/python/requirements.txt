@@ -4,3 +4,4 @@ autobahn
 Twisted
 pyopenssl
 service_identity
+openpyxl
