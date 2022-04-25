@@ -6,3 +6,13 @@
 If you have any questions, please post your issues on the board, We will ack you as soon as we can.Thanks.
 
 friendly api doc at : <https://apidocs.jbex.com>
+
+## bots
+### 1. Jubi History
+export history within specified time range, the exported file is  /tmp/jubi-history.xlsx
+
+#### Command
+```shell
+cd sdk/python/traders
+python jubi_history.py
+```
